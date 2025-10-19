@@ -1,12 +1,12 @@
 {
   "profiles": {
-    "DataAccess": {
+    "Shared": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:61075;http://localhost:61076"
+      "applicationUrl": "https://localhost:53630;http://localhost:53631"
     }
   }
 }
