@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Services.Auth;
+using Services.Products;
+using Services.Products.Interfaces;
 using System.Text;
 
 
@@ -18,7 +20,7 @@ builder.Services.AddSwaggerGen();
  builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=../Database/dev.db"));
 
-// JWT Token inisialization
+// JWT Token configuration
 var settings = builder.Configuration.GetSection("Jwt");
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
@@ -34,6 +36,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 
 });
+
+// service injection = Products
+builder.Services.AddScoped<IProductService,ProductService>();
 
 builder.Services.AddScoped<JwtService>();
 builder.Services.AddScoped<AuthService>();

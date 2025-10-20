@@ -6,9 +6,13 @@ namespace DataAccess
     public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            //User seeding
             modelBuilder.Entity<User>().HasData(
              new User
              {
@@ -33,7 +37,18 @@ namespace DataAccess
                  CreatedAt = new DateTime(2025, 10, 18, 0, 0, 0, DateTimeKind.Utc)
              });
 
-            base.OnModelCreating(modelBuilder);
+            // Product seeding (example product)
+            modelBuilder.Entity<Product>().HasData(
+                new Product
+                {
+                    Id = Guid.Parse("885b3631-64f5-4c56-886b-ce4e492e3a53"),
+                    Name = "Screwdriver Set 115 in 1 Magnetic Precision Tool Kit",
+                    Description = "Upgrade your toolkit with the 115 in 1 Magnetic Screwdriver Set, a professional-grade precision tool kit designed for repairing electronics, gadgets, and household items. Whether you’re fixing a laptop, smartphone, gaming console, tablet, or camera, this all-in-one screwdriver kit provides every bit and accessory you’ll ever need.\r\n\r\nBuilt with high-quality chrome vanadium steel, this durable and corrosion-resistant set ensures long-lasting performance for both professionals and DIY enthusiasts.",
+                    Category = "Accessories",
+                    Price = 1990.99M,
+                    CreatedAt = DateTime.UtcNow
+                }
+                );
         }
     }
 }
